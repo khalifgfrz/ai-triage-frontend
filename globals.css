@@ -1,3 +1,57 @@
 @import "tailwindcss";
-@import "tailwindcss/preflight";
-@tailwind utilities;
+
+@theme inline {
+  --font-sans: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback', ui-monospace, monospace;
+
+  --color-background: #09090b;
+  --color-foreground: #fafafa;
+  --color-card: #18181b;
+  --color-card-foreground: #fafafa;
+  --color-muted: #27272a;
+  --color-muted-foreground: #a1a1aa;
+  --color-border: #27272a;
+  --color-input: #27272a;
+  --color-primary: #3b82f6;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #27272a;
+  --color-secondary-foreground: #fafafa;
+  --color-accent: #10b981;
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-ring: #3b82f6;
+
+  --color-urgency-high: #ef4444;
+  --color-urgency-high-bg: rgba(239, 68, 68, 0.1);
+  --color-urgency-medium: #f59e0b;
+  --color-urgency-medium-bg: rgba(245, 158, 11, 0.1);
+  --color-urgency-low: #10b981;
+  --color-urgency-low-bg: rgba(16, 185, 129, 0.1);
+
+  --color-status-processing: #3b82f6;
+  --color-status-processing-bg: rgba(59, 130, 246, 0.1);
+  --color-status-ready: #f59e0b;
+  --color-status-ready-bg: rgba(245, 158, 11, 0.1);
+  --color-status-resolved: #10b981;
+  --color-status-resolved-bg: rgba(16, 185, 129, 0.1);
+  --color-status-failed: #ef4444;
+  --color-status-failed-bg: rgba(239, 68, 68, 0.1);
+
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: var(--color-foreground);
+}
