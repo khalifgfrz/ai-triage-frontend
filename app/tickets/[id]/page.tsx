@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
 import { revalidatePath } from "next/cache";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 
 type Props = { params: { id: string } };
@@ -14,7 +14,8 @@ export default async function TicketDetail({ params }: Props) {
   async function resolveTicket() {
     "use server";
     await api.patch(`/tickets/${params.id}/resolve`);
-    revalidatePath(`/tickets/${params.id}`);
+    revalidatePath(`/tickets`);
+    redirect(`/tickets`);
   }
 
   const urgencyConfig: Record<string, { bg: string; text: string; dot: string }> = {
