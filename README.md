@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Triage Frontend
+
+Frontend application for an AI-powered support ticket triage system. Built with Next.js 14, Tailwind CSS 4, and SWR for real-time data fetching.
+
+## Features
+
+- **AI Auto-Categorization** -- Tickets are automatically categorized by AI based on content analysis
+- **Urgency Detection** -- Sentiment analysis determines urgency levels (High / Medium / Low)
+- **AI Suggested Response** -- AI generates draft replies that can be reviewed and edited before resolving
+- **Real-time Dashboard** -- Ticket statuses update automatically via SWR polling (no manual refresh needed)
+- **Ticket Management** -- Create, view, and resolve support tickets from a single dashboard
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS 4
+- **Language**: TypeScript
+- **HTTP Client**: Axios
+- **Data Fetching**: SWR (polling every 3 seconds)
+
+## Project Structure
+
+```
+app/
+  page.tsx                        # Homepage / landing
+  tickets/
+    page.tsx                      # Tickets dashboard
+    [id]/page.tsx                 # Ticket detail & resolve
+  create-tickets/
+    page.tsx                      # Create new ticket form
+  api/
+    tickets/
+      route.ts                   # GET proxy for client-side fetching
+      [id]/resolve/route.ts      # POST proxy for resolving tickets
+components/
+  Navbar.tsx                      # Navigation bar
+  TicketsDashboard.tsx            # Client component with SWR polling
+  TicketList.tsx                  # Ticket list with empty state
+  TicketItem.tsx                  # Individual ticket card
+lib/
+  api.ts                          # Axios instance (backend connection)
+types/
+  ticket.ts                       # Ticket TypeScript interface
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- A running instance of the [AI Triage Backend](https://github.com/khalifgfrz/ai-triage-backend) API
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/khalifgfrz/ai-triage-frontend.git
+cd ai-triage-frontend
+
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the root directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
+```
 
-## Learn More
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_API_BASE_URL` | Base URL of the AI Triage backend API |
 
-To learn more about Next.js, take a look at the following resources:
+### Running the App
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Development
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Production build
+npm run build
+npm start
+```
+
+The app will be available at `http://localhost:3000`.
+
+## Pages Overview
+
+| Route | Description |
+|---|---|
+| `/` | Landing page with feature overview |
+| `/tickets` | Dashboard with stats, ticket list, and real-time status updates |
+| `/tickets/[id]` | Ticket detail with customer message, AI suggested response, and resolve action |
+| `/create-tickets` | Form to submit a new support ticket |
+
+## Ticket Statuses
+
+| Status | Description |
+|---|---|
+| `PROCESSING` | Ticket is being analyzed by AI |
+| `READY` | AI analysis complete, ready for review |
+| `RESOLVED` | Ticket has been resolved |
+| `FAILED` | AI processing failed |
+
+## Urgency Levels
+
+| Level | Description |
+|---|---|
+| High | Urgent issue requiring immediate attention |
+| Medium | Moderate priority issue |
+| Low | Low priority, non-urgent issue |
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The easiest way to deploy this app is via the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme). Make sure to set the `NEXT_PUBLIC_API_BASE_URL` environment variable in your Vercel project settings.
