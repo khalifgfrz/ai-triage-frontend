@@ -1,14 +1,15 @@
-import TicketList from "@/components/TicketList";
 import { api } from "@/lib/api";
+import TicketsDashboard from "@/components/TicketsDashboard";
+
+export const dynamic = "force-dynamic";
 
 export default async function TicketsPage() {
   const res = await api.get("/tickets");
   const tickets = res.data;
 
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Tickets Dashboard</h1>
-      <TicketList tickets={tickets} />
+    <main className="py-10">
+      <TicketsDashboard initialTickets={tickets} />
     </main>
   );
 }
