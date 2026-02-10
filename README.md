@@ -22,6 +22,7 @@ Frontend application for an AI-powered support ticket triage system. Built with 
 
 ```
 app/
+  layout.tsx                      # Root layout with Navbar, fonts, and metadata
   page.tsx                        # Homepage / landing
   tickets/
     page.tsx                      # Tickets dashboard
