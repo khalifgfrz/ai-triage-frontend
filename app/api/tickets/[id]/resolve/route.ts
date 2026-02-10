@@ -3,9 +3,12 @@ import { api } from "@/lib/api";
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    await api.patch(`/tickets/${params.id}/resolve`);
+    const body = await request.json().catch(() => ({}));
+    const aiDraft = body.aiDraft ?? undefined;
 
-    return NextResponse.redirect(new URL(`/tickets/${params.id}`, request.url), {
+    await api.patch(`/tickets/${params.id}/resolve`, { aiDraft });
+
+    return NextResponse.redirect(new URL(`/tickets`, request.url), {
       status: 303,
     });
   } catch (error) {
