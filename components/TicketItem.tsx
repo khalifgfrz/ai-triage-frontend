@@ -43,7 +43,9 @@ export default function TicketItem({ ticket }: Props) {
   return (
     <Link href={`/tickets/${ticket.id}`} className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-5 transition-colors hover:border-muted-foreground/30">
       <div className="flex items-start justify-between gap-4">
-        <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1">{ticket.subject}</h3>
+        <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+          {ticket.ticketNumber} <span className="opacity-50">•</span> {ticket.subject}
+        </h3>
         <svg
           width="16"
           height="16"

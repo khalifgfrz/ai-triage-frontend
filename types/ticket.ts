@@ -1,5 +1,6 @@
 export interface Ticket {
   id: string;
+  ticketNumber: string;
   userEmail: string;
   subject: string;
   message: string;
